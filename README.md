@@ -1,2 +1,2 @@
 # sire
-Sistema de Requerimento do IFPE Campus Paulista
+Sistema de Requerimentos do IFPE Campus Paulista
