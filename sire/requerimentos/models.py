@@ -14,6 +14,7 @@ class Requerimento(models.Model):
     datetime_criacao = models.DateTimeField(auto_now_add=True)
     datetime_edicao = models.DateTimeField(auto_now = True)
     curso = models.ForeignKey(Curso, on_delete = models.SET_NULL, null = True)
+    solicitacao = models.CharField(max_length = 2000)
 
 class Anexo(models.Model):
     datetime_criacao = models.DateTimeField(auto_now_add = True)
