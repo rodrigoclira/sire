@@ -116,7 +116,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 
 #https://wsvincent.com/django-user-authentication-tutorial-login-and-logout/
-LOGIN_REDIRECT_URL = 'listar'
+LOGIN_REDIRECT_URL = 'list_req'
 LOGOUT_REDIRECT_URL = 'home'

@@ -5,6 +5,14 @@
 
 {% block content %}
 
-Listar 
+{% if despachos %}
+<ul>
+    {% for despacho in despachos %}
+    <li><a href="#">{{ despacho.requerimento.tipo }}</a></li>
+    {% endfor %}
+<ul>
+{% endif %}
+
+
 
 {% endblock %}
