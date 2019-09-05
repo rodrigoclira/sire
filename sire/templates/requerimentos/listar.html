@@ -8,7 +8,7 @@
 {% if despachos %}
 <ul>
     {% for despacho in despachos %}
-    <li><a href="#">{{ despacho.requerimento.tipo }}</a></li>
+    <li><a href="/requerimento/{{ despacho.requerimento.pk }}/resposta/">{{ despacho.requerimento.tipo }} do curso {{ despacho.requerimento.curso }} </a></li>
     {% endfor %}
 <ul>
 {% endif %}

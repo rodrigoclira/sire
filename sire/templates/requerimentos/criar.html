@@ -88,10 +88,10 @@
 				<div class="form-group col-md-8">
 						<label for="inputCurso">Curso</label>
 						<select id="inputCurso" class="form-control">
-							<option selected>Escolha...</option>
-							<option>Técnico Manutenção e Suporte em Informática</option>
-							<option>Técnico em Administração</option>
-							<option>Tecnologia em Análise e Desenvolvimento de Sistemas</option>
+							<option value="None" selected>Escolha...</option>
+							{% for curso in cursos %}
+							<option value="{curso.sigla}">{{curso.nome}}</option>
+							{% endfor %}												
 						</select>
 				</div>
 			</div>

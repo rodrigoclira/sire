@@ -121,5 +121,5 @@ STATICFILES_DIRS = [
 ]
 
 #https://wsvincent.com/django-user-authentication-tutorial-login-and-logout/
-LOGIN_REDIRECT_URL = 'list_req'
+LOGIN_REDIRECT_URL = 'novos'
 LOGOUT_REDIRECT_URL = 'home'
