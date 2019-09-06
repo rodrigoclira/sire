@@ -52,7 +52,7 @@ class Despacho(models.Model):
     conteudo = models.CharField(max_length=5000)
     datetime_criacao = models.DateTimeField(auto_now_add = True)
     datetime_edicao = models.DateTimeField(auto_now = True)
-    despanchante = models.ForeignKey(User, on_delete = models.PROTECT, related_name = 'despachante')
+    despachante = models.ForeignKey(User, on_delete = models.PROTECT, related_name = 'despachante')
     proximo = models.ForeignKey(User, on_delete = models.SET_NULL, null = True, related_name = 'proximo')
     solicitar_alteracao = models.BooleanField("Solicitação de Alteração", default = False)
     deletado = models.BooleanField("Deletado", default = False )

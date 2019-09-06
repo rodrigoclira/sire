@@ -21,22 +21,41 @@ def buscar(request):
 def novos(request):
     despachos = Despacho.objects.filter(proximo = request.user) #Errado
     print (despachos)
-    context = {'despachos': despachos}
+    context = {
+        'despachos': despachos,
+        'novos': True,    
+    }
     return render(request, 'requerimentos/listar.html', context)
 
 @login_required
-def resposta(request, requerimento_id):
-    requerimento = get_object_or_404(Requerimento, pk = requerimento_id) #Errado
-    
+def responder(request, requerimento_id):
+    requerimento = get_object_or_404(Requerimento, pk = requerimento_id) 
+    despachos = Despacho.objects.filter(requerimento = requerimento)
     context = {
         'requerimento': requerimento,
+        'despachos': despachos,        
     }
+    print (despachos)
+    return render(request, 'requerimentos/detalhar.html', context)
 
+@login_required
+def editar(request, requerimento_id):
+    requerimento = get_object_or_404(Requerimento, pk = requerimento_id) 
+    despachos = Despacho.objects.filter(requerimento = requerimento)
+    context = {
+        'requerimento': requerimento,
+        'despachos': despachos,        
+        'editar': True,
+    }
+    print (despachos)
     return render(request, 'requerimentos/detalhar.html', context)
 
 @login_required
 def historico(request):
-    despachos = Despacho.objects.filter(proximo = request.user)
+    despachos = Despacho.objects.filter(despachante = request.user)
     print (despachos)
-    context = {'despachos': despachos}
+    context = {
+        'despachos': despachos,
+        'historico': True,
+        }
     return render(request, 'requerimentos/listar.html', context)

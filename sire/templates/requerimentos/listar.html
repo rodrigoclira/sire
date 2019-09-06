@@ -8,7 +8,11 @@
 {% if despachos %}
 <ul>
     {% for despacho in despachos %}
-    <li><a href="/requerimento/{{ despacho.requerimento.pk }}/resposta/">{{ despacho.requerimento.tipo }} do curso {{ despacho.requerimento.curso }} </a></li>
+        {% if novos %}
+            <li><a href="/requerimento/{{ despacho.requerimento.pk }}/responder/">{{ despacho.requerimento.tipo }} do curso {{ despacho.requerimento.curso }} </a></li>
+        {% elif historico %}
+        <li><a href="/requerimento/{{ despacho.requerimento.pk }}/editar/">{{ despacho.requerimento.tipo }} do curso {{ despacho.requerimento.curso }} </a></li>
+        {% endif %}
     {% endfor %}
 <ul>
 {% endif %}
