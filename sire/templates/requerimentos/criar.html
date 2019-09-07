@@ -64,33 +64,80 @@
 	</div>
 	
 	<!-- Left column -->
-	<div class="col-md-8 order-md-1">
-		<h4 class="mb-3">Requerimento</h4>
-		<form>
-			{% csrf_token %}
+	<form method="post">
+		<div class="col-md-12 order-md-1">
+			<h4 class="mb-3">Requerimento</h4>
+				{% csrf_token %}
+				{{ form.non_field_errors }}			
+				<div class="form-row">
+					<div class="form-group col-md-8">
+						{{form.nome.errors}}
+						<label for="{{ form.nome.id_for_label }}">Nome</label>
+						{{ form.nome }}
+					</div>
+					<div class="form-group col-md-4">
+						{{form.matricula.errors}}
+						<label for="{{ form.matricula.id_for_label }}">Matrícula</label>
+						{{ form.matricula }}
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						{{form.email.errors}}
+						<label for="{{ form.email.id_for_label }}">E-mail</label>
+						{{ form.email }}
+					</div>
+
+					<div class="form-group col-md-8">
+						{{form.curso.errors}}
+						<label for="{{ form.curso.id_for_label }}">Curso</label>
+						{{ form.curso }}
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						{{form.solicitacao.errors}}
+						<label for="{{ form.solicitacao.id_for_label }}">Curso</label>
+						{{ form.solicitacao }}
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						{{form.upload.errors}}
+						{{ form.upload }}									
+					</div>
+				</div>
+
+			<button type="Enviar" class="btn btn-primary">Submeter</button>
+		</div>
+	</form>
+			<!--
 			<div class="form-row">
 				<div class="form-group col-md-8">
 					<label for="inputNome">Nome</label>
-					<input type="text" class="form-control" id="inputNome" placeholder="Nome">
+					<input type="text" class="form-control" name="nome" id="inputNome" placeholder="Nome">
 				</div>
 				<div class="form-group col-md-4">
 					<label for="inputMatricula">Matrícula</label>
-					<input type="text" class="form-control" id="inputMatricula" placeholder="Matrícula">
+					<input type="text" class="form-control" name="matricula" id="inputMatricula" placeholder="Matrícula">
 				</div>				
 			</div>
 
 			<div class="form-row">
 				<div class="form-group col-md-4">
 						<label for="inputEmail">E-mail</label>
-						<input type="email" class="form-control" id="inputEmail" placeholder="E-mail">
+						<input type="email" class="form-control" name="email" id="inputEmail" placeholder="E-mail">
 				</div>
 
 				<div class="form-group col-md-8">
 						<label for="inputCurso">Curso</label>
-						<select id="inputCurso" class="form-control">
+						<select id="inputCurso" name="curso" class="form-control">
 							<option value="None" selected>Escolha...</option>
 							{% for curso in cursos %}
-							<option value="{curso.sigla}">{{curso.nome}}</option>
+							<option value="{{curso.sigla}}">{{curso.nome}}</option>
 							{% endfor %}												
 						</select>
 				</div>
@@ -98,17 +145,24 @@
 			<div class="form-row">
 				<div class="form-group col-md-12">
 					<label for="exampleFormControlTextarea1">Solicitação</label>
-					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+					<textarea class="form-control" name="solicitacao" id="exampleFormControlTextarea1" rows="3"></textarea>
 				</div>
 			</div>
-
+			
 			<div class="form-row">
 				<div class="form-group col-md-12">
 						<input type="file" id="customFileLang" >									
 				</div>
-				<!---https://stackoverflow.com/questions/43349767/how-to-add-upload-choose-multiple-files-from-one-input-tag -->
 			</div>
-			<button type="Enviar" class="btn btn-primary">Submeter</button>
-		</form>	
-	</div>
+
+			-->
+			<!---https://stackoverflow.com/questions/43349767/how-to-add-upload-choose-multiple-files-from-one-input-tag -->
+	
+			{% if message %}
+			<div class="col-md-12 order-md-1"> 
+				{{ message }}
+			</div>
+			{% endif %}
+
+
 {% endblock %}
