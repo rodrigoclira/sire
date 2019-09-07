@@ -71,9 +71,9 @@
 				{{ form.non_field_errors }}			
 				<div class="form-row">
 					<div class="form-group col-md-8">
-						{{form.nome.errors}}
-						<label for="{{ form.nome.id_for_label }}">Nome</label>
-						{{ form.nome }}
+						{{form.solicitante.errors}}
+						<label for="{{ form.solicitante.id_for_label }}">Nome</label>
+						{{ form.solicitante }}
 					</div>
 					<div class="form-group col-md-4">
 						{{form.matricula.errors}}
@@ -98,8 +98,16 @@
 
 				<div class="form-row">
 					<div class="form-group col-md-12">
+						{{form.tipo.errors}}
+						<label for="{{ form.tipo.id_for_label }}">Tipo de Requerimento</label>
+						{{ form.tipo }}
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-12">
 						{{form.solicitacao.errors}}
-						<label for="{{ form.solicitacao.id_for_label }}">Curso</label>
+						<label for="{{ form.solicitacao.id_for_label }}">Solicitação</label>
 						{{ form.solicitacao }}
 					</div>
 				</div>
@@ -113,56 +121,8 @@
 
 			<button type="Enviar" class="btn btn-primary">Submeter</button>
 		</div>
-	</form>
-			<!--
-			<div class="form-row">
-				<div class="form-group col-md-8">
-					<label for="inputNome">Nome</label>
-					<input type="text" class="form-control" name="nome" id="inputNome" placeholder="Nome">
-				</div>
-				<div class="form-group col-md-4">
-					<label for="inputMatricula">Matrícula</label>
-					<input type="text" class="form-control" name="matricula" id="inputMatricula" placeholder="Matrícula">
-				</div>				
-			</div>
-
-			<div class="form-row">
-				<div class="form-group col-md-4">
-						<label for="inputEmail">E-mail</label>
-						<input type="email" class="form-control" name="email" id="inputEmail" placeholder="E-mail">
-				</div>
-
-				<div class="form-group col-md-8">
-						<label for="inputCurso">Curso</label>
-						<select id="inputCurso" name="curso" class="form-control">
-							<option value="None" selected>Escolha...</option>
-							{% for curso in cursos %}
-							<option value="{{curso.sigla}}">{{curso.nome}}</option>
-							{% endfor %}												
-						</select>
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="form-group col-md-12">
-					<label for="exampleFormControlTextarea1">Solicitação</label>
-					<textarea class="form-control" name="solicitacao" id="exampleFormControlTextarea1" rows="3"></textarea>
-				</div>
-			</div>
-			
-			<div class="form-row">
-				<div class="form-group col-md-12">
-						<input type="file" id="customFileLang" >									
-				</div>
-			</div>
-
-			-->
-			<!---https://stackoverflow.com/questions/43349767/how-to-add-upload-choose-multiple-files-from-one-input-tag -->
-	
-			{% if message %}
-			<div class="col-md-12 order-md-1"> 
-				{{ message }}
-			</div>
-			{% endif %}
+	</form>		
+	<!---https://stackoverflow.com/questions/43349767/how-to-add-upload-choose-multiple-files-from-one-input-tag -->
 
 
 {% endblock %}

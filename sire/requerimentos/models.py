@@ -19,11 +19,11 @@ class Disciplina(models.Model):
         return self.nome
 
 class TipoRequerimento(models.Model):
-    tipo = models.CharField(max_length = 150)
+    nome = models.CharField(max_length = 150)
     deletado = models.BooleanField("Deletado", default = False )
 
     def __str__(self):
-        return self.tipo
+        return self.nome
 
 class Requerimento(models.Model):
     solicitante = models.CharField(max_length=200)
@@ -37,7 +37,7 @@ class Requerimento(models.Model):
     deletado = models.BooleanField("Deletado", default = False )
 
     def __str__(self):
-        return self.tipo.tipo + ' solicitado por ' + self.solicitante + ' de ' + self.curso.nome
+        return self.tipo.nome + ' solicitado por ' + self.solicitante + ' de ' + self.curso.nome
 
 class Anexo(models.Model):
     datetime_criacao = models.DateTimeField("Data de Criação",auto_now_add = True)
@@ -60,3 +60,18 @@ class Despacho(models.Model):
 class DisciplinaRequerimento(models.Model):
     disciplina = models.ForeignKey(Disciplina,  on_delete = models.SET_NULL, null = True)
     requerimento = models.ForeignKey(Requerimento, on_delete = models.SET_NULL, null = True)
+
+
+class Funcao(models.Model):
+    nome = models.CharField("Função", max_length=100)
+    prioridade = models.IntegerField()
+    def __str__(self):
+        return self.nome
+
+
+class UsuarioFuncao(models.Model):
+    usuario = models.ForeignKey(User, on_delete = models.SET_NULL, null = True)
+    funcao = models.ForeignKey(Funcao, on_delete = models.SET_NULL, null = True)
+
+    def __str__(self):
+        return f"{self.funcao} - {self.usuario.first_name} {self.usuario.last_name}"

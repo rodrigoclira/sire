@@ -5,13 +5,13 @@
 
 {% block content %}
 
-{% if despachos %}
+{% if requerimentos %}
 <ul>
-    {% for despacho in despachos %}
+    {% for requerimento in requerimentos %}
         {% if novos %}
-            <li><a href="/requerimento/{{ despacho.requerimento.pk }}/responder/">{{ despacho.requerimento.tipo }} do curso {{ despacho.requerimento.curso }} </a></li>
+            <li><a href="/requerimento/{{ requerimento.pk }}/responder/">{{ requerimento.tipo }} do curso {{ requerimento.curso }} </a></li>
         {% elif historico %}
-        <li><a href="/requerimento/{{ despacho.requerimento.pk }}/editar/">{{ despacho.requerimento.tipo }} do curso {{ despacho.requerimento.curso }} </a></li>
+        <li><a href="/requerimento/{{ requerimento.pk }}/editar/">{{ requerimento.tipo }} do curso {{ requerimento.curso }} </a></li>
         {% endif %}
     {% endfor %}
 <ul>
