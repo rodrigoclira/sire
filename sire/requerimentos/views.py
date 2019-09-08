@@ -57,11 +57,11 @@ def foo(request):
 
 @login_required
 def novos(request):
-
-    usuarioFuncao = UsuarioFuncao.objects.get(usuario = request.user)
+    usuarioPrioridades = list(UsuarioFuncao.objects.filter(usuario = request.user).values_list("funcao__prioridade"))    
+    usuarioPrioridades = [prioridade[0] for prioridade in usuarioPrioridades if prioridade]    
     requerimentos = []
 
-    if (usuarioFuncao.funcao.prioridade == settings.PRIORIDADE_PRIMEIRO_DESPACHO):
+    if (settings.PRIORIDADE_PRIMEIRO_DESPACHO in usuarioPrioridades):
         requerimentos = Requerimento.objects.exclude(pk__in = list(Despacho.objects.all().values_list('requerimento', flat=True)))
         print (requerimentos)
     
