@@ -6,7 +6,7 @@ from .models import TipoRequerimento, Anexo, Despacho, Funcao
 
 @admin.register(Requerimento)
 class RequerimentoAdmin(admin.ModelAdmin):
-    list_display = ('solicitante', 'tipo', 'curso', 'datetime_criacao', )
+    list_display = ('solicitante', 'tipo', "curso", 'datetime_criacao', )
     
     
 @admin.register(Curso)

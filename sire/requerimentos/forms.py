@@ -9,7 +9,6 @@ class RequerimentoForm(forms.ModelForm):
     choices_curso = [(curso.sigla, curso.nome) for curso in Curso.objects.all()]    
     choices_curso.insert(0, ("None", "Selecionar..."))
     curso = forms.ChoiceField(label="Curso", widget=forms.Select, choices=choices_curso)
-    
     choices_tipo = [(tipo.pk, tipo.nome) for tipo in TipoRequerimento.objects.all()]    
     choices_tipo.insert(0, (-1, "Selecionar..."))    
     tipo = forms.ChoiceField(label="Tipo", widget=forms.Select, choices=choices_tipo)

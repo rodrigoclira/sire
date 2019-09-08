@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django_extensions.db.fields import RandomCharField
 
 class Curso(models.Model):
     nome = models.CharField(max_length = 150)
@@ -35,6 +36,7 @@ class Requerimento(models.Model):
     curso = models.ForeignKey(Curso, on_delete = models.SET_NULL, null = True)
     solicitacao = models.CharField(max_length = 2000)
     deletado = models.BooleanField("Deletado", default = False )
+    protocolo = RandomCharField(length=8, unique=True)
 
     def __str__(self):
         return self.tipo.nome + ' solicitado por ' + self.solicitante + ' de ' + self.curso.nome

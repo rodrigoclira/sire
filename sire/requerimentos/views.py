@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from .forms import RequerimentoForm
-from .models import Despacho, Requerimento, Curso, TipoRequerimento
+from .models import Despacho, Requerimento, Curso, TipoRequerimento, UsuarioFuncao
+from django.conf import settings
 
 def index(request):    
     context = { }
@@ -56,11 +57,18 @@ def foo(request):
 
 @login_required
 def novos(request):
-    requerimentos_novos = Requerimento.objects.exclude(pk__in = list(Despacho.objects.all().values_list('requerimento', flat=True)))
+
+    usuarioFuncao = UsuarioFuncao.objects.get(usuario = request.user)
+    requerimentos = []
+
+    if (usuarioFuncao.funcao.prioridade == settings.PRIORIDADE_PRIMEIRO_DESPACHO):
+        requerimentos = Requerimento.objects.exclude(pk__in = list(Despacho.objects.all().values_list('requerimento', flat=True)))
+        print (requerimentos)
+    
     
     #despachos = Despacho.objects.filter(proximo = request.user) #Errado    
     context = {
-        'requerimentos': requerimentos_novos,
+        'requerimentos': requerimentos,
         'novos': True,    
     }
     return render(request, 'requerimentos/listar.html', context)
@@ -91,7 +99,6 @@ def editar(request, requerimento_id):
 @login_required
 def historico(request):
     despachos = Despacho.objects.filter(despachante = request.user)
-    print (despachos)
     context = {
         'despachos': despachos,
         'historico': True,

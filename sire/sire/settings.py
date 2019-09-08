@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'sire.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'data.sqlite3'),
     }
 }
 
@@ -122,4 +122,6 @@ STATICFILES_DIRS = [
 
 #https://wsvincent.com/django-user-authentication-tutorial-login-and-logout/
 LOGIN_REDIRECT_URL = 'novos'
-LOGOUT_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'index'
+
+PRIORIDADE_PRIMEIRO_DESPACHO = 1 
