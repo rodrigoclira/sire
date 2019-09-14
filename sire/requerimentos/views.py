@@ -6,13 +6,6 @@ from .forms import RequerimentoForm
 from .models import Despacho, Requerimento, Curso, TipoRequerimento, UsuarioFuncao
 from django.conf import settings
 
-def index(request):    
-    context = { }
-    return render(request, 'requerimentos/index.html', context)
-
-def resultado(request, new_context):
-    return render(request, 'requerimentos/resultado.html', new_context)
-
 class RequerimentoFormView(TemplateView):
     template_name = 'requerimentos/criar.html'
 
@@ -46,6 +39,14 @@ class RequerimentoFormView(TemplateView):
         response = resultado(request, context)
         return response
 
+def index(request):    
+    context = { }
+    return render(request, 'requerimentos/index.html', context)
+
+def resultado(request, new_context):
+    return render(request, 'requerimentos/resultado.html', new_context)
+
+
 def buscar(request):    
     context = { }
     return render(request, 'requerimentos/pesquisar.html', context)    
@@ -55,6 +56,8 @@ def foo(request):
     print (request.POST)
     return render(request, 'requerimentos/index.html', context)
 
+
+## Required Views
 @login_required
 def novos(request):
     usuarioPrioridades = list(UsuarioFuncao.objects.filter(usuario = request.user).values_list("funcao__prioridade"))    
