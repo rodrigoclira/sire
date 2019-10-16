@@ -1,10 +1,13 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from .forms import RequerimentoForm
 from .models import Despacho, Requerimento, Curso, TipoRequerimento, UsuarioFuncao
 from django.conf import settings
+from django.contrib.auth.models import User
+
+
 
 class RequerimentoFormView(TemplateView):
     template_name = 'requerimentos/criar.html'
@@ -30,21 +33,16 @@ class RequerimentoFormView(TemplateView):
             requerimento.tipo = tipo_object
 
             requerimento.save()
-            message = "Sucesso"            
-        else:
-            message = "error"
 
-        context['message']: message
-        
-        response = resultado(request, context)
-        return response
+        return redirect('resultado')
+
 
 def index(request):    
     context = { }
     return render(request, 'requerimentos/index.html', context)
 
-def resultado(request, new_context):
-    return render(request, 'requerimentos/resultado.html', new_context)
+def resultado(request):
+    return render(request, 'requerimentos/resultado.html')
 
 
 def buscar(request):    
@@ -78,25 +76,47 @@ def novos(request):
 
 @login_required
 def responder(request, requerimento_id):
+
     requerimento = get_object_or_404(Requerimento, pk = requerimento_id) 
     despachos = Despacho.objects.filter(requerimento = requerimento)
+    usuarios = User.objects.all()
+
     context = {
         'requerimento': requerimento,
-        'despachos': despachos,        
+        'despachos': despachos,
+        'usuarios': usuarios,        
     }
     print (despachos)
+
+    if request.POST:
+        data = request.POST.dict()
+        despacho = Despacho()
+        despacho.requerimento = requerimento
+        despacho.conteudo = data.get('despacho')
+        print(data.get('proximo'))
+        despacho.proximo = get_object_or_404(User, pk = data.get('proximo'))
+        despacho.despachante = request.user
+        despacho.save()
+
+        print (despacho) 
+
     return render(request, 'requerimentos/detalhar.html', context)
 
 @login_required
 def editar(request, requerimento_id):
     requerimento = get_object_or_404(Requerimento, pk = requerimento_id) 
     despachos = Despacho.objects.filter(requerimento = requerimento)
+    usuarios = User.objects.all()
+
     context = {
         'requerimento': requerimento,
         'despachos': despachos,        
         'editar': True,
+        'usuarios': usuarios,
     }
+
     print (despachos)
+    print (context)
     return render(request, 'requerimentos/detalhar.html', context)
 
 @login_required

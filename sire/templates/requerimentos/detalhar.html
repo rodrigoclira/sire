@@ -15,21 +15,24 @@
 	<!-- Right column -->
 	<div class="col-md-5 order-md-2">
 			<h4 class="mb-3">Despacho de {{user.first_name}}</h4>
-			<form>
+			<form method="post">
 				{% csrf_token %}
 				<div class="form-row">
 					<div class="form-group col-md-11">
-						<label for="inputProximo">Nome do Próximo</label>
-						<input type="text" class="form-control" id="inputProximo" placeholder="Escolha o usuário a ser notificado">
-					</div>								
+						<label for="conteudo">Despacho: </label>
+						<textarea name="despacho" class="form-control" id="conteudo" rows="6"></textarea>
+					</div>
 				</div>
-
 
 				<div class="form-row">
 					<div class="form-group col-md-11">
-						<label for="conteudo">Conteúdo do Despacho</label>
-						<textarea class="form-control" id="conteudo" rows="6">	</textarea>
-					</div>
+						<label for="inputProximo">Encaminhar para:</label>
+						<select id="inputProximo" class="form-control" name="proximo">
+							{% for usuario in usuarios %}
+							<option value="{{ usuario.pk }}">{{usuario.first_name|capfirst}}  {{usuario.last_name|title}}</option>
+							{% endfor %}
+						</select>
+					</div>								
 				</div>
 	
 				<button type="Enviar" class="btn btn-primary">Enviar</button>
